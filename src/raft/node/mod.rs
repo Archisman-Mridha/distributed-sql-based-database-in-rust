@@ -5,7 +5,7 @@ use candidate::Candidate;
 use follower::Follower;
 use leader::Leader;
 use super::{
-  log::Log, message::Message, state_machine_driver::StateMachineDriverInstruction,
+  log::Log, message::Message, state_machine_driver::StateMachineInstruction,
   types::{NodeId, Term, Ticks}
 };
 use std::ops::Range;
@@ -31,7 +31,7 @@ pub struct GenericNode<R: Role= Follower> {
   log: Log,
 
   // Sends instruction to the state-machine driver.
-  stateMachineDriverInstructionsSender: UnboundedSender<StateMachineDriverInstruction>
+  stateMachineInstructor: UnboundedSender<StateMachineInstruction>
 }
 
 impl<R: Role> GenericNode<R> {
@@ -46,7 +46,7 @@ impl<R: Role> GenericNode<R> {
       messageSender: self.messageSender,
 
       log: self.log,
-      stateMachineDriverInstructionsSender: self.stateMachineDriverInstructionsSender
+      stateMachineInstructor: self.stateMachineInstructor
     }
   }
 

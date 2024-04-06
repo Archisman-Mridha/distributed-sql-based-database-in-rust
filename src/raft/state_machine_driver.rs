@@ -1,1 +1,1 @@
-pub enum StateMachineDriverInstruction { }
+pub enum StateMachineInstruction { }

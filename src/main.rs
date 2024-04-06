@@ -3,6 +3,7 @@
 mod raft;
 mod storage;
 mod server;
+mod sql;
 mod result;
 
 #[tokio::main]

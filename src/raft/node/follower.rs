@@ -2,7 +2,7 @@ use std::collections::HashSet;
 use tokio::sync::mpsc::UnboundedSender;
 use crate::{
   raft::{
-    log::Log, message::Message, state_machine_driver::StateMachineDriverInstruction,
+    log::Log, message::Message, state_machine_driver::StateMachineInstruction,
     types::{NodeId, Ticks}
   },
   result::Result
@@ -58,7 +58,7 @@ impl GenericNode<Follower> {
                          peers: HashSet<u8>,
                          mut log: Log,
                          messageSender: UnboundedSender<Message>,
-                         stateMachineDriverInstructionsSender: UnboundedSender<StateMachineDriverInstruction>) -> Result<GenericNode>
+                         stateMachineDriverInstructionsSender: UnboundedSender<StateMachineInstruction>) -> Result<GenericNode>
   {
     let (newlyDiscoveredTerm, castVoteInNewlyDiscoveredTerm)= log.getCurrentTermAndCastVote( )?;
 
@@ -71,7 +71,7 @@ impl GenericNode<Follower> {
       messageSender,
 
       log,
-      stateMachineDriverInstructionsSender
+      stateMachineInstructor: stateMachineDriverInstructionsSender
     })
   }
 }
