@@ -1,10 +1,11 @@
-use std::fmt::Display;
+use std::{fmt::Display, num::{ParseFloatError, ParseIntError}};
 
 pub type Result<T> = std::result::Result<T, Error>;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum Error {
-  Parse(String)
+  Parse(String),
+  Value(String)
 }
 
 impl Display for Error {
@@ -14,3 +15,15 @@ impl Display for Error {
 }
 
 impl std::error::Error for Error { }
+
+impl From<ParseIntError> for Error {
+  fn from(err: ParseIntError) -> Self {
+    Error::Parse(err.to_string( ))
+  }
+}
+
+impl From<ParseFloatError> for Error {
+  fn from(err: ParseFloatError) -> Self {
+    Error::Parse(err.to_string( ))
+  }
+}
