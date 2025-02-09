@@ -1,10 +1,5 @@
-#![allow(non_snake_case, unused)]
+#![allow(non_snake_case)]
 
-mod raft;
-mod storage;
-mod server;
-mod sql;
-mod result;
+pub mod kv;
 
-#[tokio::main]
-async fn main( ) { }
+fn main() {}
