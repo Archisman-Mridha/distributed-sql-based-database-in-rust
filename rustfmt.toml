@@ -9,3 +9,5 @@ comment_width = 100
 use_field_init_shorthand = true
 
 control_brace_style = "ClosingNextLine"
+
+struct_field_align_threshold = 60
